@@ -1,0 +1,5 @@
+# these are env vars!!
+sumologic:
+ #accessId: ${SUMO_ACCESS_ID}
+  #accessKey: ${SUMO_ACCESS_KEY}
+  clusterName: "education-eks-anneimWr"
