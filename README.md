@@ -1,16 +1,16 @@
-# Learn Terraform - Provision an EKS Cluster
+# Learn Terraform - Provision an EKS Cluster (from ricks fork of hashicorp repo)
+https://github.com/hashicorp/learn-terraform-provision-eks-cluster
+
 This repo is a companion repo to the [Provision an EKS Cluster tutorial](https://developer.hashicorp.com/terraform/tutorials/kubernetes/eks), containing
 Terraform configuration files to provision an EKS cluster on AWS.
 
 ## A. Cluster Setup Tutorial
 https://developer.hashicorp.com/terraform/tutorials/kubernetes/eks
-
-You can either follow the steps exactly and clone origional repo https://github.com/hashicorp/learn-terraform-provision-eks-cluster. This is just a fork of that with some tweaks.
+Origional repo https://github.com/hashicorp/learn-terraform-provision-eks-cluster. 
 
 
 ## B. Kubernetes Provider Tutorial
 https://developer.hashicorp.com/terraform/tutorials/kubernetes/kubernetes-provider
-The dir: learn-terraform-deploy-nginx-kubernetes is a completed version of this tutorial with a the parent terrafrom state path tweaked (in the lab they assume you are one dir up.)
 
 # C. Sumo k8s
 https://github.com/SumoLogic/sumologic-kubernetes-collection/blob/release-v2.19/deploy/README.md
