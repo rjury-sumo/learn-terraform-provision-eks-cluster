@@ -2,4 +2,4 @@
 sumologic:
  #accessId: ${SUMO_ACCESS_ID}
   #accessKey: ${SUMO_ACCESS_KEY}
-  clusterName: "education-eks-anneimWr"
+  clusterName: "education-eks-F4cZ44T7"
