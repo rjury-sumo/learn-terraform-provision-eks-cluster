@@ -1,5 +1,5 @@
 # these are env vars!!
 sumologic:
- #accessId: ${SUMO_ACCESS_ID}
-  #accessKey: ${SUMO_ACCESS_KEY}
-  clusterName: "education-eks-F4cZ44T7"
+#  accessId: ${SUMO_ACCESS_ID}
+#  accessKey: ${SUMO_ACCESS_KEY}
+  clusterName: "education-eks-6UvgZdv8"
