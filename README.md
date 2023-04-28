@@ -1,10 +1,18 @@
-# Learn Terraform - Provision an EKS Cluster (from ricks fork of hashicorp repo)
+# Combined Labs: Provision An EKS Cluster with Terraform, Expiriment with kubernetes provider, setup sumo kubernetes collection, setup a sample app & trace
+
+This is a mash up of a bunch of separate repos with some hacks.
+
+Working through this will
+- A. setup a EKS cluster in AWS with enough compute to run sumo collection on v3 with otel
+- B. work through an exercise lab with provider to setup a nginx deployment and a CRD task
+- C. Install 3.5 of sumologic_kubernetes_collection
+- D. setup a live microservices demo app using a hacked version of the sumo demo project (mostly same just wiht repeat of installing collection removed)
+
+## A. Cluster Setup Tutorial
 https://github.com/hashicorp/learn-terraform-provision-eks-cluster
 
 This repo is a companion repo to the [Provision an EKS Cluster tutorial](https://developer.hashicorp.com/terraform/tutorials/kubernetes/eks), containing
 Terraform configuration files to provision an EKS cluster on AWS.
-
-## A. Cluster Setup Tutorial
 https://developer.hashicorp.com/terraform/tutorials/kubernetes/eks
 Origional repo https://github.com/hashicorp/learn-terraform-provision-eks-cluster. 
 
@@ -125,7 +133,7 @@ kubectl describe pod release-1-sumologic-traces-sampler-779c9964f4-8dzq7 -n sumo
 Warning  FailedScheduling  61s (x2 over 2m21s)  default-scheduler  0/3 nodes are available: 3 Insufficient cpu.
 ```
 
-# Setting up a demo tracing app
+# D. Setting up a demo tracing app using opentelemetry-demo-application
 
 We will follow along roughly with  our own blog using the k8s flavor
 https://www.sumologic.com/blog/common-opentelemetry-demo-application/
