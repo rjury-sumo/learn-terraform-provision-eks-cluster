@@ -1,0 +1,59 @@
+# Copyright The OpenTelemetry Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+.github
+docs
+internal
+src/*/README.md
+src/*/Dockerfile
+src/*/*/Dockerfile
+
+###################################
+# currencyservice
+./src/currencyservice/client.js
+./src/currencyservice/node_modules/
+###################################
+
+###################################
+# featureflagservice
+# Common development/test artifacts
+./src/featureflagservice/cover/
+./src/featureflagservice/doc/
+./src/featureflagservice/test/
+./src/featureflagservice/tmp/
+./src/featureflagservice/.elixir_ls
+
+###################################
+# frontend
+./src/frontend/node_modules/
+
+###################################
+# shippingservice
+./src/shippingservice/target
+###################################
+
+# Mix artifacts
+./src/featureflagservice/_build/
+./src/featureflagservice/deps/
+./src/featureflagservice/*.ez
+
+# Generated on crash by the VM
+./src/featureflagservice/erl_crash.dump
+
+# Static artifacts - These should be fetched and built inside the Docker image
+./src/featureflagservice/assets/node_modules/
+./src/featureflagservice/priv/static/assets/
+./src/featureflagservice/priv/static/cache_manifest.json
+###################################
+
