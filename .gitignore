@@ -30,3 +30,6 @@ terraform.rc
 cluster-output.txt
 README.md
 sumo.k8s/fluentd.2.19.1/fluentd/.DS_Store
+
+# local testing
+sumo.k8s/fluentd.2.19.1
