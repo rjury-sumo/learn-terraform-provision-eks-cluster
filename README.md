@@ -45,7 +45,7 @@ https://github.com/SumoLogic/sumologic-kubernetes-collection/blob/release-v3.5/d
 then choose installation link and follow steps on this page OR....
 
 ## Tl;DR version
-Becuase we are using EKS and kubectl is configured to point at the EKS cluster we don't have to say ssh only a remote host, helm/kubectl will deploy remotely. if you might have more than one cluster setup make sure to do usual check you are pointing at right k8s  ```kubetcl cluster info``` etc.
+Becuase we are using EKS and kubectl is configured to point at the EKS cluster we don't have to say ssh only a remote host, helm/kubectl will deploy remotely. if you might have more than one cluster setup make sure to do usual check you are pointing at right k8s  ```kubectl cluster-info``` etc.
 
 - install helm if you haven't already ``` brew install helm```
 - setup env vars for ```--set sumologic.accessId=$SUMO_ACCESS_ID --set sumologic.accessKey=$SUMO_ACCESS_KEY```
@@ -61,7 +61,7 @@ https://github.com/SumoLogic/sumologic-kubernetes-collection/blob/release-v3.5/d
 - then run helm using values yaml
 ```
 cd sumo.k8s
-helm upgrade --install -n 'sumologic-demo'  --create-namespace  -f values.yaml  release-1 sumologic/sumologic --set sumologic.accessId=$SUMO_ACCESS_ID --set sumologic.accessKey=$SUMO_ACCESS_KEY
+helm upgrade --install -n 'sumologic-demo'  --create-namespace  -f values.yaml  release-1 sumologic/sumologic --set sumologic.accessId=$SUMO_ACCESS_ID --set sumologic.accessKey=$SUMO_ACCESS_KEY 
 ```
 
 ## Validation of setup phase
@@ -198,7 +198,7 @@ go back to the sumo.k8s dir in terminal
 let's add tracing auto instrumentation
 ```
 cd sumo.k8s
-helm upgrade --install -n 'sumologic-demo'  --create-namespace  -f values.yaml  release-1 sumologic/sumologic --set sumologic.accessId=$SUMO_ACCESS_ID --set sumologic.accessKey=$SUMO_ACCESS_KEY -set sumologic.traces.enabled=true
+helm upgrade --install -n 'sumologic-demo'  --create-namespace  -f values.yaml  release-1 sumologic/sumologic --set sumologic.accessId=$SUMO_ACCESS_ID --set sumologic.accessKey=$SUMO_ACCESS_KEY --set sumologic.traces.enabled=true
 ```
 
 make sure to map local host so you can see your app
@@ -209,3 +209,21 @@ kubectl --namespace sumologic-demo port-forward service/sumo-demo-frontend 8080:
 then you can browse to the app via localhost:8080
 
 You should now see all your stuff auto instrumented in service map etc.
+
+# Changing scrape interval for prometheus
+A common config by customers is to change the scrape interval from 30s to 1m or 2m to lower DPM billed by sending less frequent metrics.
+https://github.com/SumoLogic/sumologic-kubernetes-collection/blob/release-v2.19/deploy/docs/Best_Practices.md#changing-scrape-interval-for-prometheus
+
+let's change the scape interval to 2m
+
+update values.yaml 
+```
+kube-prometheus-stack:  # For values.yaml
+  prometheus:
+    prometheusSpec:
+      scrapeInterval: '2m'
+```
+
+```
+helm upgrade --install -n 'sumologic-demo'  --create-namespace  -f values.yaml  release-1 sumologic/sumologic --set sumologic.accessId=$SUMO_ACCESS_ID --set sumologic.accessKey=$SUMO_ACCESS_KEY --set sumologic.traces.enabled=true 
+```
