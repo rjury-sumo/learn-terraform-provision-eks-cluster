@@ -1,6 +1,6 @@
 # Combined Labs: Provision An EKS Cluster with Terraform, Expiriment with kubernetes provider, setup sumo kubernetes collection, setup a sample app & trace
 
-This is a mash up of a bunch of separate repos with some hacks.
+This is a mash up of a bunch of separate repos with some hacks to help testing out sumo's k8s collection plugin.
 
 Working through this will
 - A. setup a EKS cluster in AWS with enough compute to run sumo collection on v3 with otel
