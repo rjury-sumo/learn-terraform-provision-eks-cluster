@@ -2,4 +2,53 @@
 sumologic:
 #  accessId: ${SUMO_ACCESS_ID}
 #  accessKey: ${SUMO_ACCESS_KEY}
-  clusterName: "education-eks-6UvgZdv8"
+  clusterName: "education-eks-5ji1xgrf"
+
+  # logs:
+  #   enabled: true
+  #   metadata:
+    #  provider: fluentd
+    # collector:
+    #   otelcol:
+    #     enabled: false
+
+# kube-prometheus-stack:  # For values.yaml
+#   prometheus:
+#     prometheusSpec:
+#       scrapeInterval: '2m'
+
+  config:
+    processors:
+      ## Tags spans with K8S metadata, basing on the context IP
+      k8s_tagger:
+        ## When true, only IP is assigned and passed (so it could be tagged on another collector)
+        passthrough: false
+        ## When true, additional fields, such as serviceName are being also extracted
+        owner_lookup_enabled: true
+        ## Extracted fields and assigned names
+        extract:
+          metadata:
+            ## extract the following well-known metadata fields
+            - containerId
+            - containerName
+            - daemonSetName
+            - deploymentName
+            - hostName
+            - namespace
+            - nodeName
+            - podId
+            - podName
+            - replicaSetName
+            - serviceName
+            - statefulSetName
+            - k8s.pod.uid
+          annotations:
+            - tag_name: "k8s.pod.annotation.%s"
+              key: "*"
+          namespace_labels:
+            - tag_name: "k8s.namespace.label.%s"
+              key: "*"
+          labels:
+            - tag_name: "k8s.pod.label.%s"
+              key: "*"
+            
