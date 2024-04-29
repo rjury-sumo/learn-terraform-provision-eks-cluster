@@ -40,7 +40,7 @@ https://developer.hashicorp.com/terraform/tutorials/kubernetes/kubernetes-provid
 
 # C. Sumo k8s collection installation
 go here & review architecture graphs
-https://github.com/SumoLogic/sumologic-kubernetes-collection/blob/release-v3.5/docs/README.md
+https://github.com/SumoLogic/sumologic-kubernetes-collection/blob/main/docs/README.md
 
 then choose installation link and follow steps on this page OR....
 
@@ -56,7 +56,7 @@ helm repo update
 ```
 
 for these steps
-https://github.com/SumoLogic/sumologic-kubernetes-collection/blob/release-v3.5/docs/installation.md#install-chart
+https://help.sumologic.com/docs/send-data/kubernetes/install-helm-chart/
 - set cluster name in values.yaml as per yours "education-eks-anneimWr"
 - then run helm using values yaml
 ```
@@ -66,51 +66,43 @@ helm upgrade --install -n 'sumologic-demo'  --create-namespace  -f values.yaml  
 
 ## Validation of setup phase
 check the pod name for the install container with 
-``` kubetctl get pods -n sumologic-demo```
+``` kubectl get pods -n sumologic-demo```
 
 If that single pod is crashloopbackoff you have serious problem (such as bad credts). make sure to get some logs before the pod finishes with kubectl logs <podname> then if there is an issue with helm/tf in the container you will see why.
 
 ## Validation of collection
 After a few minutes you should see the release pod (which runs some terraform) switch to a bunch of pods. After a minute or so they shuould all be running not pending.
 ```
-➜  learn-terraform-provision-eks-cluster git:(main) ✗ kubectl get pods -n sumologic-demo 
-NAME                                                      READY   STATUS    RESTARTS   AGE
-prometheus-release-1-kube-prometheus-prometheus-0         2/2     Running   0          10m
-release-1-kube-prometheus-operator-6889484c96-6dt24       1/1     Running   0          2m1s
-release-1-kube-state-metrics-7f77b7df84-j2bxq             1/1     Running   0          2m1s
-release-1-prometheus-node-exporter-2m45v                  1/1     Running   0          3m25s
-release-1-prometheus-node-exporter-5nkn4                  1/1     Running   0          3m24s
-release-1-prometheus-node-exporter-bbkbt                  1/1     Running   0          11m
-release-1-prometheus-node-exporter-cqzcs                  1/1     Running   0          11m
-release-1-prometheus-node-exporter-m9tx5                  1/1     Running   0          3m23s
-release-1-prometheus-node-exporter-mlxpf                  1/1     Running   0          3m19s
-release-1-prometheus-node-exporter-mwbg7                  1/1     Running   0          3m10s
-release-1-prometheus-node-exporter-qmchc                  1/1     Running   0          3m25s
-release-1-prometheus-node-exporter-wbxnn                  1/1     Running   0          11m
-release-1-sumologic-otelcol-events-0                      1/1     Running   0          2m1s
-release-1-sumologic-otelcol-instrumentation-0             1/1     Running   0          2m
-release-1-sumologic-otelcol-instrumentation-1             1/1     Running   0          2m
-release-1-sumologic-otelcol-instrumentation-2             1/1     Running   0          2m
-release-1-sumologic-otelcol-logs-0                        1/1     Running   0          2m2s
-release-1-sumologic-otelcol-logs-1                        1/1     Running   0          57s
-release-1-sumologic-otelcol-logs-2                        1/1     Running   0          11m
-release-1-sumologic-otelcol-logs-collector-526mr          1/1     Running   0          3m3s
-release-1-sumologic-otelcol-logs-collector-55mfc          1/1     Running   0          3m4s
-release-1-sumologic-otelcol-logs-collector-5l97m          1/1     Running   0          2m59s
-release-1-sumologic-otelcol-logs-collector-6pkfc          1/1     Running   0          11m
-release-1-sumologic-otelcol-logs-collector-6rgt9          1/1     Running   0          2m40s
-release-1-sumologic-otelcol-logs-collector-9jxv7          1/1     Running   0          11m
-release-1-sumologic-otelcol-logs-collector-c8nmx          1/1     Running   0          11m
-release-1-sumologic-otelcol-logs-collector-k4jrq          1/1     Running   0          2m55s
-release-1-sumologic-otelcol-logs-collector-k4kmc          1/1     Running   0          3m4s
-release-1-sumologic-otelcol-metrics-0                     1/1     Running   0          60s
-release-1-sumologic-otelcol-metrics-1                     1/1     Running   0          2m
-release-1-sumologic-otelcol-metrics-2                     1/1     Running   0          11m
-release-1-sumologic-remote-write-proxy-566dc9fc5c-6bfkp   1/1     Running   0          2m
-release-1-sumologic-remote-write-proxy-566dc9fc5c-v496g   1/1     Running   0          2m2s
-release-1-sumologic-remote-write-proxy-566dc9fc5c-vbm57   1/1     Running   0          2m2s
-release-1-sumologic-traces-gateway-c86fcdb9-cdhgg         1/1     Running   0          2m3s
-release-1-sumologic-traces-sampler-779c9964f4-8dzq7       1/1     Running   0          2m2s
+  sumo.k8s git:(main) ✗  kubectl get pods -n sumologic-demo
+NAME                                                           READY   STATUS    RESTARTS   AGE
+release-1-kube-state-metrics-5877b6d866-94z6m                  1/1     Running   0          115s
+release-1-opentelemetry-operator-7dcc6dc59c-5p4mp              2/2     Running   0          115s
+release-1-prometheus-node-exporter-9cjj5                       1/1     Running   0          115s
+release-1-prometheus-node-exporter-jzvdq                       1/1     Running   0          116s
+release-1-prometheus-node-exporter-pgtqn                       1/1     Running   0          116s
+release-1-prometheus-node-exporter-q9vkx                       1/1     Running   0          116s
+release-1-prometheus-node-exporter-t854s                       1/1     Running   0          115s
+release-1-prometheus-node-exporter-w8vs7                       1/1     Running   0          116s
+release-1-sumologic-metrics-collector-0                        1/1     Running   0          112s
+release-1-sumologic-metrics-targetallocator-78968c89bc-zfdq4   1/1     Running   0          112s
+release-1-sumologic-otelcol-events-0                           0/1     Pending   0          114s
+release-1-sumologic-otelcol-instrumentation-0                  1/1     Running   0          114s
+release-1-sumologic-otelcol-instrumentation-1                  1/1     Running   0          100s
+release-1-sumologic-otelcol-instrumentation-2                  1/1     Running   0          100s
+release-1-sumologic-otelcol-logs-0                             0/1     Pending   0          114s
+release-1-sumologic-otelcol-logs-1                             0/1     Pending   0          100s
+release-1-sumologic-otelcol-logs-2                             0/1     Pending   0          100s
+release-1-sumologic-otelcol-logs-collector-5nvlw               1/1     Running   0          113s
+release-1-sumologic-otelcol-logs-collector-8j4hf               1/1     Running   0          113s
+release-1-sumologic-otelcol-logs-collector-bhbks               1/1     Running   0          113s
+release-1-sumologic-otelcol-logs-collector-mpmj6               1/1     Running   0          113s
+release-1-sumologic-otelcol-logs-collector-qtn6n               1/1     Running   0          113s
+release-1-sumologic-otelcol-logs-collector-qx2z2               1/1     Running   0          113s
+release-1-sumologic-otelcol-metrics-0                          0/1     Pending   0          114s
+release-1-sumologic-otelcol-metrics-1                          0/1     Pending   0          100s
+release-1-sumologic-otelcol-metrics-2                          0/1     Pending   0          100s
+release-1-sumologic-traces-gateway-56c4988b8c-vxtjp            1/1     Running   0          115s
+release-1-sumologic-traces-sampler-5d6f885466-dg7hb            1/1     Running   0          115s
 ```
 
 
